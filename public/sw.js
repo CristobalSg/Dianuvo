@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dianuvo-shell-v3';
+const CACHE_NAME = 'dianuvo-shell-v6';
 const APP_SHELL = [
   '/',
   '/manifest.webmanifest',
