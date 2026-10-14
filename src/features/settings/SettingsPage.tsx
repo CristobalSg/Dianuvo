@@ -1,0 +1,18 @@
+import { Bell, ChevronRight, FolderHeart, LogOut, Smartphone, UserRound } from 'lucide-react';
+import { useEffect, useState, type FormEvent } from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from '../../components/ui/Button';
+import { Field, Input, Select } from '../../components/ui/Field';
+import { useToast } from '../../components/ui/ToastProvider';
+import { useAuth } from '../auth/AuthProvider';
+import { useProfile, useUpdateProfile } from '../../hooks/useDianuvoData';
+
+export function SettingsPage() {
+  const { user, signOut } = useAuth(); const { data: profile } = useProfile(); const update = useUpdateProfile(); const { showToast } = useToast();
+  const [name, setName] = useState(''); const [timezone, setTimezone] = useState('America/Santiago'); const [installEvent, setInstallEvent] = useState<Event | null>(null);
+  useEffect(() => { if (profile) { setName(profile.display_name); setTimezone(profile.timezone); } }, [profile]);
+  useEffect(() => { const handler = (event: Event) => { event.preventDefault(); setInstallEvent(event); }; window.addEventListener('beforeinstallprompt', handler); return () => window.removeEventListener('beforeinstallprompt', handler); }, []);
+  async function save(event: FormEvent) { event.preventDefault(); try { await update.mutateAsync({ display_name: name.trim(), timezone }); showToast('Preferencias guardadas'); } catch (reason) { showToast(reason instanceof Error ? reason.message : 'No pudimos guardar.', 'error'); } }
+  async function install() { const prompt = installEvent as Event & { prompt: () => Promise<void> }; await prompt?.prompt(); setInstallEvent(null); }
+  return <div className="page settings-page"><header className="simple-header"><span className="eyebrow">TU ESPACIO</span><h1>Ajustes</h1><p>Haz que Dianuvo funcione a tu manera.</p></header><section className="profile-card"><div className="avatar"><UserRound /></div><div><h2>{profile?.display_name || 'Tu perfil'}</h2><p>{user?.email}</p></div></section><form onSubmit={save} className="settings-card form-stack"><div className="section-heading"><h2>Perfil y zona horaria</h2></div><Field label="Nombre visible"><Input maxLength={80} value={name} onChange={(e) => setName(e.target.value)} /></Field><Field label="Zona horaria"><Select value={timezone} onChange={(e) => setTimezone(e.target.value)}><option value="America/Santiago">Santiago</option><option value="America/Bogota">Bogotá</option><option value="America/Lima">Lima</option><option value="America/Mexico_City">Ciudad de México</option><option value="America/Argentina/Buenos_Aires">Buenos Aires</option><option value="Europe/Madrid">Madrid</option></Select></Field><Button type="submit" disabled={update.isPending}>{update.isPending ? 'Guardando…' : 'Guardar cambios'}</Button></form><div className="settings-links"><Link to="/categories"><span className="settings-link-icon"><FolderHeart /></span><div><strong>Categorías</strong><small>Organiza tus áreas personales</small></div><ChevronRight /></Link><button onClick={install} disabled={!installEvent}><span className="settings-link-icon"><Smartphone /></span><div><strong>Instalar aplicación</strong><small>{installEvent ? 'Añadir Dianuvo a tu pantalla' : 'Usa “Añadir a inicio” en tu navegador'}</small></div><ChevronRight /></button><div className="settings-info"><span className="settings-link-icon"><Bell /></span><div><strong>Recordatorios</strong><small>Próximamente, sin activar permisos todavía</small></div></div></div><Button variant="ghost" full onClick={signOut}><LogOut size={18} /> Cerrar sesión</Button><p className="app-version">Dianuvo · versión 0.1.0</p></div>;
+}
