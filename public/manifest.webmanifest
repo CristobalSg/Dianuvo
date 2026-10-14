@@ -1,7 +1,7 @@
 {
-  "name": "Dianuvo — Organización personal",
+  "name": "Dianuvo",
   "short_name": "Dianuvo",
-  "description": "Organiza tareas, rutinas y horarios diarios.",
+  "description": "Organiza tus tareas, rutinas y actividades diarias.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -9,8 +9,9 @@
   "theme_color": "#514945",
   "orientation": "portrait-primary",
   "icons": [
-    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
     { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }

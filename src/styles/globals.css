@@ -30,6 +30,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
 .eyebrow { display: block; font-size: .68rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
 .muted { color: var(--muted); line-height: 1.6; }
+.brand-logo { --brand-logo-size: 36px; display: inline-flex; align-items: center; gap: calc(var(--brand-logo-size) * .24); width: max-content; max-width: 100%; line-height: 1; }
+.brand-logo .brand-symbol { display: block; width: var(--brand-logo-size); height: var(--brand-logo-size); flex: 0 0 var(--brand-logo-size); object-fit: contain; }
+.brand-logo .brand-wordmark { color: var(--quartz); font-family: "Bodoni 72", Didot, Baskerville, Georgia, serif; font-size: calc(var(--brand-logo-size) * .82); font-weight: 500; letter-spacing: -.055em; white-space: nowrap; }
+.brand-logo-light .brand-wordmark { color: var(--white); }
 .button { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 20px; border: 0; border-radius: 16px; font-weight: 750; cursor: pointer; transition: transform .18s ease, opacity .18s ease, box-shadow .18s ease; }
 .button:hover:not(:disabled) { transform: translateY(-1px); }
 .button:active:not(:disabled) { transform: scale(.98); }
@@ -59,7 +63,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
 .auth-shell { min-height: 100vh; display: grid; background: white; }
 .auth-brand { position: relative; min-height: 280px; overflow: hidden; background: var(--quartz); color: white; padding: max(28px, env(safe-area-inset-top)) 26px 34px; display: flex; flex-direction: column; justify-content: space-between; }
-.auth-logo { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 16px; background: var(--indian-red); color: white; position: relative; z-index: 2; }
+.auth-logo { display: inline-flex; width: max-content; color: white; position: relative; z-index: 2; }
 .auth-brand h1 { font-size: clamp(2.1rem, 10vw, 3.6rem); line-height: .98; letter-spacing: -.055em; margin: 16px 0 12px; position: relative; z-index: 2; }
 .auth-brand p { max-width: 400px; color: rgba(255,255,255,.68); margin-bottom: 0; position: relative; z-index: 2; }
 .auth-orbit { position: absolute; width: 280px; height: 280px; right: -90px; bottom: -120px; border: 1px solid rgba(255,255,255,.16); border-radius: 50%; }
@@ -76,8 +80,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .auth-switch a { font-weight: 800; }
 
 .app-frame { min-height: 100vh; background: var(--canvas); }
+.app-brand-header { min-height: calc(56px + env(safe-area-inset-top)); padding: max(10px, env(safe-area-inset-top)) 20px 10px; display: flex; align-items: flex-end; background: rgba(248,245,243,.94); border-bottom: 1px solid var(--line); backdrop-filter: blur(18px); }
 .app-content { min-height: 100vh; padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
-.page { width: min(100%, 760px); margin: 0 auto; padding: max(28px, env(safe-area-inset-top)) 18px 28px; }
+.page { width: min(100%, 760px); margin: 0 auto; padding: 22px 18px 28px; }
 .bottom-nav { position: fixed; z-index: 30; left: 50%; bottom: 0; transform: translateX(-50%); width: min(100%, 760px); height: calc(78px + env(safe-area-inset-bottom)); padding: 8px 10px env(safe-area-inset-bottom); background: rgba(255,255,255,.94); border: 1px solid var(--line); border-bottom: 0; backdrop-filter: blur(18px); display: grid; grid-template-columns: 1fr 1fr 72px 1fr 1fr; align-items: center; box-shadow: 0 -12px 40px rgba(81,73,69,.08); }
 .nav-item { min-width: 0; color: #9a918c; display: grid; justify-items: center; gap: 4px; font-size: .64rem; font-weight: 700; }
 .nav-item svg { width: 21px; }
@@ -85,7 +90,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .nav-add { width: 58px; height: 58px; justify-self: center; margin-top: -28px; border: 5px solid var(--canvas); border-radius: 50%; background: var(--cordovan); color: white; display: grid; place-items: center; box-shadow: 0 10px 24px rgba(137,66,66,.3); cursor: pointer; }
 .nav-add svg { width: 26px; }
 
-.day-hero { color: white; background: var(--quartz); margin: calc(-1 * max(28px, env(safe-area-inset-top))) -18px 18px; padding: max(34px, env(safe-area-inset-top)) 22px 27px; border-radius: 0 0 34px 34px; }
+.day-hero { color: white; background: var(--quartz); margin: -22px -18px 18px; padding: 28px 22px 27px; border-radius: 0 0 34px 34px; }
 .day-hero-top { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
 .day-hero h1 { margin: 8px 0 3px; font-size: clamp(2rem, 9vw, 3rem); letter-spacing: -.055em; }
 .day-hero p { color: rgba(255,255,255,.65); font-size: .9rem; }
@@ -276,6 +281,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .bottom-nav { bottom: 12px; border-radius: 24px; border-bottom: 1px solid var(--line); padding-bottom: 8px; height: 78px; }
   .app-content { padding-bottom: 118px; }
   .day-hero { margin-inline: 0; margin-top: 0; border-radius: 30px; }
+  .app-brand-header { padding-inline: 24px; }
   .page { padding-top: 24px; }
   .task-sheet, .mini-sheet { margin-bottom: 18px; border-radius: 28px; }
 }
@@ -288,6 +294,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .two-columns { grid-template-columns: 1fr; }
   .score-card { gap: 12px; padding: 16px; }
   .score-ring { width: 88px; height: 88px; }
+  .app-brand-header .brand-wordmark { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

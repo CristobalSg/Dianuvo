@@ -1,12 +1,12 @@
-import { CalendarCheck2 } from 'lucide-react';
 import { Link, Outlet } from 'react-router-dom';
+import { BrandLogo } from '../../components/ui/BrandLogo';
 
 export function AuthLayout() {
   return (
     <main className="auth-shell">
       <section className="auth-brand">
         <Link to="/" className="auth-logo" aria-label="Dianuvo">
-          <CalendarCheck2 size={25} />
+          <BrandLogo size={42} variant="light" showText />
         </Link>
         <div>
           <span className="eyebrow">DIANUVO</span>

@@ -71,6 +71,19 @@ Las pruebas cubren recurrencia, días ISO, fechas locales, horarios, progreso, e
 
 Las reescrituras SPA excluyen assets, iconos, manifest y service worker. El service worker nunca cachea solicitudes ni respuestas de Supabase, y la caché de React Query se elimina al cerrar sesión.
 
+## Identidad visual e instalación PWA
+
+La identidad se implementa con SVG propio en `public/brand`, sin depender de imágenes raster externas. El componente reutilizable `BrandLogo` combina el símbolo vectorial con un wordmark tipográfico; acepta tamaño, variante para fondo claro/oscuro, visibilidad del texto, clase y texto alternativo.
+
+Los iconos normales utilizan el símbolo sobre `#F8F5F3`. Los iconos maskable mantienen el símbolo dentro de una placa Almond y del área segura central sobre fondo Quartz. También se incluye un `favicon.svg`, y todas las variantes PNG/ICO se generan desde fuentes vectoriales del proyecto.
+
+Para comprobar la instalación:
+
+1. **iPhone o iPad:** abre la URL de producción en Safari y elige **Compartir → Añadir a pantalla de inicio**.
+2. **Android:** abre la URL en Chrome y elige **Instalar aplicación** o **Añadir a pantalla principal**.
+
+Los sistemas móviles pueden conservar iconos de una instalación anterior. Si no aparece la versión nueva, desinstala Dianuvo de la pantalla de inicio, actualiza o cierra el navegador y vuelve a instalarla. El service worker usa una nueva versión de caché y revalida imágenes en segundo plano.
+
 ## Alcance actual
 
 La primera versión incluye todas las funciones descritas arriba. No implementa escrituras offline —una decisión deliberada para evitar conflictos y mezcla entre cuentas— ni notificaciones push; la interfaz las identifica como una mejora futura. Antes de producción se recomienda ejecutar las pruebas manuales de RLS y decidir la política de confirmación de correo del proyecto.

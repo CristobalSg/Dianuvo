@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#514945"/>
+  <circle cx="256" cy="256" r="160" fill="#EBD4CC"/>
+  <!-- El símbolo ocupa menos del 50% del lienzo, dentro del círculo seguro maskable. -->
+  <g transform="translate(57.6 57.6) scale(.775)">
+    <path fill="#514945" d="M96 96h160v20c0 77.3-62.7 140-140 140H96V96Z"/>
+    <path fill="#894242" d="M256 96h20c77.3 0 140 62.7 140 140v20h-20c-77.3 0-140-62.7-140-140V96Z"/>
+    <path fill="#514945" d="M96 256h20c77.3 0 140 62.7 140 140v20H96V256Z"/>
+    <path fill="#D55C5A" d="M396 256h20v20c0 77.3-62.7 140-140 140h-20v-20c0-77.3 62.7-140 140-140Z"/>
+  </g>
+</svg>

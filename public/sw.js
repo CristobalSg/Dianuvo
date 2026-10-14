@@ -1,5 +1,16 @@
-const CACHE_NAME = 'dianuvo-shell-v1';
-const APP_SHELL = ['/', '/manifest.webmanifest', '/icons/icon-192.png', '/icons/icon-512.png'];
+const CACHE_NAME = 'dianuvo-shell-v3';
+const APP_SHELL = [
+  '/',
+  '/manifest.webmanifest',
+  '/favicon.svg',
+  '/favicon-32x32.png',
+  '/favicon.ico',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
+  '/icons/icon-maskable-192.png',
+  '/icons/icon-maskable-512.png',
+  '/icons/apple-touch-icon.png',
+];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)));
@@ -23,13 +34,18 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  event.respondWith(
-    caches.match(request).then((cached) => cached || fetch(request).then((response) => {
+  event.respondWith(caches.match(request).then((cached) => {
+    const network = fetch(request).then((response) => {
       if (response.ok && ['script', 'style', 'image', 'font'].includes(request.destination)) {
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+        caches.open(CACHE_NAME).then((cache) => cache.put(request, response.clone()));
       }
       return response;
-    })),
-  );
+    });
+    // Renueva logos e iconos en segundo plano aunque mantengan una URL estable.
+    if (cached && request.destination === 'image') {
+      event.waitUntil(network.then(() => undefined).catch(() => undefined));
+      return cached;
+    }
+    return cached || network;
+  }));
 });

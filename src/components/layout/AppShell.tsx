@@ -2,6 +2,7 @@ import { BarChart3, CalendarDays, Home, Plus, Settings } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import type { TaskOccurrence } from '../../types/entities';
+import { BrandLogo } from '../ui/BrandLogo';
 import { TaskSheet } from '../../features/tasks/TaskSheet';
 import { TaskSheetProvider } from '../../features/tasks/TaskSheetContext';
 
@@ -18,6 +19,9 @@ export function AppShell() {
   return (
     <TaskSheetProvider value={api}>
       <div className="app-frame">
+        <header className="app-brand-header">
+          <BrandLogo size={30} showText />
+        </header>
         <main className="app-content"><Outlet /></main>
         <nav className="bottom-nav" aria-label="Navegación principal">
           {nav.slice(0, 2).map((item) => <NavLink key={item.to} to={item.to} end={item.end} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}><item.icon /><span>{item.label}</span></NavLink>)}
